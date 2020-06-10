@@ -1,0 +1,16 @@
+//Rodar a aplicação
+npx ts-node src/server.ts
+
+// Depois da instalção do HOTLOAD usa esse para rodar
+npm run dev
+
+// É preciso criar um arquivo de configuração do TypeScript com o comando: (Se não rodar o primeiro usa o segundo)
+npx tsc --init 
+npx typescript  --init
+
+// Todos os imports usados no projeto
+npm install express -> (cria node_modules)
+npm install typescript -D -> (Instalando o TypeScrip)
+npm install @types/express -D -> (Baixa a tipagem do TS)
+npm install ts-node -D (usamos para poder rodar a aplicação)
+npm install ts-node-dev -D (fica monitorando cada alteração no code para dar start automático)
