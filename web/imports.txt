@@ -1,0 +1,6 @@
+
+// Cria projeto WEB com tamplate do TypeScript
+npx create-react-app web --template=typescript
+
+// Rodar aplicação
+npm start
