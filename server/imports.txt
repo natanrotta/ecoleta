@@ -1,3 +1,4 @@
+#####################################################################################################################
 //Rodar a aplicação
 npx ts-node src/server.ts
 
@@ -14,3 +15,51 @@ npm install typescript -D -> (Instalando o TypeScrip)
 npm install @types/express -D -> (Baixa a tipagem do TS)
 npm install ts-node -D (usamos para poder rodar a aplicação)
 npm install ts-node-dev -D (fica monitorando cada alteração no code para dar start automático)
+
+//Banco de dados
+npm install knex
+npm install sqlite3
+
+//Rodar as migration
+npx knex migrate:latest --knexfile knexfile.ts migrate:latest
+npm run knex:migrate 
+
+//Permite todos acessar as url
+npm install cors
+npm install @types/cors
+
+
+#####################################################################################################################
+#####################################################################################################################
+
+
+
+#####################################################################################################################
+// Exemplos para se basear
+
+const usuarios = [
+    'natan',
+    'jonas',
+    'rafa'
+]
+
+app.get('/usuarios', (request, response) => {
+
+    const filtro = String(request.query.filtro);
+
+    const usuariosFiltrados = filtro ? usuarios.filter( usuario => usuario.includes(filtro)) : usuarios;
+    
+    return response.json(usuariosFiltrados);
+});
+
+app.get('/usuarios/:id', (request, response) => {
+    
+    const id = Number(request.params.id);
+
+    const usuario = usuarios[id];
+
+    return response.json(usuario);
+});
+
+#####################################################################################################################
+#####################################################################################################################
