@@ -4,3 +4,28 @@ npx create-react-app web --template=typescript
 
 // Rodar aplicação
 npm start
+
+// Icones
+npm install react-icons
+
+// Types do react
+npm install --save @types/react
+
+// Types do react dom
+npm install --save @types/react-dom
+
+//Rotas
+npm install react-router-dom
+npm install --save @types/react-router-dom
+
+//Mapa na aplicação
+npm install leaflet react-leaflet
+npm install @types/react-leaflet
+
+//Comunicação Backend
+npm install axios
+
+//API IBGE 
+UFs: https://servicodados.ibge.gov.br/api/v1/localidades/estados
+Cidades: https://servicodados.ibge.gov.br/api/v1/localidades/estados/{UF}/municipios
+

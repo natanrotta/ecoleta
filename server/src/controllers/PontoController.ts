@@ -24,6 +24,8 @@ class PontosController {
             cidade, 
             uf
         }
+
+        console.log(ponto)
     
         const transaction = await knex.transaction();
     
@@ -41,6 +43,8 @@ class PontosController {
         await transaction('ponto_item').insert(pontoItens);
 
         await transaction.commit();
+
+        console.log(idPonto)
     
         return response.json({
             id: idPonto,
