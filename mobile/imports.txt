@@ -1,0 +1,38 @@
+//Instalar Expo na Máquina
+npm install -g expo-cli
+
+//Inicia aplicação 
+expo init mobile
+
+//Instala as fontes
+expo install expo-font @expo-google-fonts/ubuntu @expo-google-fonts/roboto
+
+//Navegação
+npm i react-navigation
+npm install @react-navigation/native
+npm install react-navigation-stack @react-native-community/masked-view react-native-safe-area-context
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+//Mapa
+expo install react-native-maps
+
+//Estilização
+expo install expo-constants
+
+//React entender o .svg da imagem
+expo install react-native-svg
+
+//Manipular a API 
+npm install axios
+
+//Abre mapa na posição do user
+expo install expo-location
+
+//Email na aplicação
+expo install expo-mail-composer
+
+##########################################
+################# DESAFIO ################
+Criar a busca de todos os estados do IBGE, semelhante ao exemplo da web. 
+Para o combox usamos o seguinte: https://www.npmjs.com/package/react-native-picker-select
+dowload: npm install react-native-picker-select
