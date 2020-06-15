@@ -15,7 +15,7 @@ class PontosController {
         } = request.body;
 
         const ponto = {
-            imagem: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60',
+            imagem: request.file.filename,
             nome, 
             email,
             whatsapp,
@@ -24,8 +24,6 @@ class PontosController {
             cidade, 
             uf
         }
-
-        console.log(ponto)
     
         const transaction = await knex.transaction();
     
@@ -33,18 +31,19 @@ class PontosController {
     
         const idPonto = idPontoInserido[0];
     
-        const pontoItens = itens.map((item_id: number) => {
-            return {
-                id_item: item_id,
-                id_ponto: idPonto
-            };
+        const pontoItens = itens
+            .split(',')
+            .map((item: string) => Number(item.trim()))
+            .map((item_id: number) => {
+                return {
+                    id_item: item_id,
+                    id_ponto: idPonto
+                };
         });
     
         await transaction('ponto_item').insert(pontoItens);
 
         await transaction.commit();
-
-        console.log(idPonto)
     
         return response.json({
             id: idPonto,
@@ -61,12 +60,18 @@ class PontosController {
             return response.status(400).json({ mensagem: 'Ponto não encontrado'});
         }
 
+        const serealizaPonto = {
+            ...ponto,
+            imagem_url: `http://192.168.0.104:3333/uploads/${ponto.imagem}`,
+        };
+
+
         const itens = await knex('item')
             .join('ponto_item', 'item.id', '=', 'ponto_item.id_item')
             .where('ponto_item.id_ponto', idPontoColeta)
             .select('item.titulo')
 
-        return response.json({ ponto, itens });
+        return response.json({ ponto: serealizaPonto, itens });
     }
 
     async buscarPontos(request: Request, response: Response) {
@@ -84,7 +89,15 @@ class PontosController {
             .distinct()
             .select('ponto.*');
 
-        return response.json(pontos);
+        const serealizaPontos = pontos.map(ponto => {
+            return {
+                ...ponto,
+                imagem_url: `http://192.168.0.104:3333/uploads/${ponto.imagem}`,
+            }
+        });
+
+
+        return response.json(serealizaPontos);
     }
 }
 

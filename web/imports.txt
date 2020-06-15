@@ -29,3 +29,6 @@ npm install axios
 UFs: https://servicodados.ibge.gov.br/api/v1/localidades/estados
 Cidades: https://servicodados.ibge.gov.br/api/v1/localidades/estados/{UF}/municipios
 
+//Dropzone Image
+npm install react-dropzone
+

@@ -6,6 +6,8 @@ import { LeafletMouseEvent } from 'leaflet'
 import api from '../../services/api';
 import axios from 'axios';
 
+import Dropzone from '../../components/Dropzone/index';
+
 import './styles.css'
 
 import logo from '../../assets/logo.svg';
@@ -39,6 +41,7 @@ const CriaPontoColeta = () => {
     const [ cidadeSelecionada, setCidadeSelecionada ] = useState('0')
     const [ posicaoSelecionada, setPosicaoSelecionada ] = useState<[number, number]>([0, 0]);
     const [ itemSelecionado, setItemSelecionado ] = useState<number[]>([]);
+    const [ arquivoSelecionado, setArquivoSelecionado ] = useState<File>();
 
     const history = useHistory();
 
@@ -139,17 +142,24 @@ const CriaPontoColeta = () => {
         const [latitude, longitude] = posicaoSelecionada;
         const itens = itemSelecionado;
 
-        const dados = {
-            nome: name,
-            email,
-            whatsapp,
-            latitude,
-            longitude,
-            cidade,
-            uf, 
-            itens
+        const dados = new FormData();
+
+        dados.append("nome", name);
+        dados.append("email", email);
+        dados.append("whatsapp", whatsapp);
+        dados.append("latitude", String(latitude));
+        dados.append("longitude", String(longitude));
+        dados.append("cidade", cidade);
+        dados.append("uf", uf);
+        dados.append("itens", (itens).join(','));
+        
+        //Aqui só envia se a imagem estiver selecionada
+        if (arquivoSelecionado) {
+            dados.append('imagem', arquivoSelecionado);
         }
-         
+
+
+
         await api.post('/ponto', dados);
 
         alert('Ponto de coleta criado!')
@@ -171,6 +181,9 @@ const CriaPontoColeta = () => {
 
             <form onSubmit={controlaEnvioDeDados}>
                 <h1>Cadatro do <br/> ponto de coleta</h1>
+
+                <Dropzone arquivoEnviado={setArquivoSelecionado} />
+
                 <fieldset>
                     <legend>
                         <h2>Dados</h2>

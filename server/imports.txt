@@ -28,6 +28,14 @@ npm run knex:migrate
 npm install cors
 npm install @types/cors
 
+//Upload de Imagens
+npm install multer
+npm install @types/multer
+
+//Validações de dados
+npm install celebrate
+npm install @types/hapi__joi
+
 
 #####################################################################################################################
 #####################################################################################################################
